@@ -36,7 +36,6 @@ CFLAGS  = -mmcu=$(DEVICE) -Os -Wall -std=c99 -DF_CPU=$(CLOCK) -I $(INC)/
 SOURCES = $(wildcard *.c)
 OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
 
-# get file dependencies then build hex
 all: $(TARGET).hex
 
 $(TARGET).elf: $(OBJECTS)
@@ -45,7 +44,7 @@ $(TARGET).elf: $(OBJECTS)
 $(TARGET).hex: $(TARGET).elf
 	$(OBJCOPY) -O ihex $< $@
 
-# generate object dependencies
+# generate object file
 $(OBJECTS): $(SOURCES)
 	$(CC) $(CFLAGS) -c -o $@ $^ 
 
@@ -64,7 +63,7 @@ fuses:
 
 # show fuses already set on micro-controller
 show_fuses:
-	$(AVRDUDE) -nv
+	$(AVRDUDE) -nt
 
 # Optionally show how big the resulting program is 
 size:  $(TARGET).elf
