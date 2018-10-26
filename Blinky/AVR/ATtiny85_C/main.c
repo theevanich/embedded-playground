@@ -13,7 +13,7 @@ int main(void)
 {
 	DDRB |= 0x02;
 
-    while (1) 
+    for(; ;)
     {
 		PORTB |= 0x02;
 		_delay_ms(500);
